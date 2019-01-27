@@ -11,6 +11,15 @@ class Scraper:
         fr = open("html.txt", "w")
         fr.write(str(html))
         fr.close()
+        parser = "html.parser"
+        sp = BeautifulSoup(html, parser)
+        for tag in sp.find_all("a"):
+            url = tag.get("href")
+            if url is  None:
+                continue
+            if "html" in url:
+                print("\n" + url)
 
-sb1 = Scraper("https://pypi.org/project/beautifulsoup4/")
+
+sb1 = Scraper("https://news.google.com/")
 sb1.scrape()
